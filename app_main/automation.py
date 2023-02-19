@@ -49,8 +49,8 @@ class Automation:
     def update_error_status(self):
         if self.progress_id:
             res = requests.put(
-                    f"{settings.AUTOMATION_CROS_DOMAIN}/api/automation-progress-test/{self.progress_id}",
-                    data=json.dumps({"driver_close": True,"closed_step":self.step}),
+                    f"{settings.AUTOMATION_PROGRESS_URL}",
+                    data=json.dumps({"progress_id":self.progress_id, "driver_close": True,"closed_step":self.step}),
                     headers=headers,
             )
             print(res.status_code)
@@ -152,8 +152,8 @@ class Automation:
         try:
             if self.progress_id:
                 res = requests.put(
-                        f"{settings.AUTOMATION_CROS_DOMAIN}/api/automation-progress-test/{self.progress_id}",
-                        data=json.dumps({"current_step": step}),
+                        f"{settings.AUTOMATION_PROGRESS_URL}",
+                        data=json.dumps({"progress_id":self.progress_id, "current_step": step}),
                         headers=headers,
                 )
                 print(res.status_code)
@@ -169,11 +169,10 @@ class Automation:
         try:
             if self.progress_id:
                 res = requests.put(
-                    f"{settings.AUTOMATION_CROS_DOMAIN}/api/automation-progress-test/{self.progress_id}",
-                    data=json.dumps({"complete": True}),
+                    f"{settings.AUTOMATION_PROGRESS_URL}",
+                    data=json.dumps({"progress_id":self.progress_id, "complete": True}),
                     headers=headers,
                 )
-                print(res.status_code)
         except Exception as e:
             print(e)
 
@@ -181,11 +180,10 @@ class Automation:
         try:
             if usdot and self.company_id:
                 res = requests.put(
-                    f"{settings.AUTOMATION_CROS_DOMAIN}/api/automation-start/{self.company_id}",
+                    f"{settings.AUTOMATION_START_URL}{self.company_id}",
                     data=json.dumps({"usdot": usdot}),
                     headers=headers,
                 )
-                print(res.status_code)
         except Exception as e:
             print(e)
 

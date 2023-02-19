@@ -126,7 +126,7 @@ STATIC_URL = "/static/"
 STATICFILE_DIRS = [BASE_DIR / "static"]
 STATIC_ROOT = BASE_DIR / "static_root"
 
-MEDIA_ROOT = BASE_DIR / "media_root"
+MEDIA_ROOT = BASE_DIR / "media"
 MEDIA_URL = "/media/"
 
 # Default primary key field type
@@ -136,3 +136,5 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 
 AUTOMATION_CROS_DOMAIN = "http://18.232.168.89:8005"
+AUTOMATION_START_URL = f"{AUTOMATION_CROS_DOMAIN}/api/automation-start/"
+AUTOMATION_PROGRESS_URL = f"{AUTOMATION_CROS_DOMAIN}/api/automation-progress-test/"

@@ -9,7 +9,6 @@ from rest_framework.views import APIView
 from app_main.automation import automate_usdot_free, automate_usdot_paid
 from app_main.utils import automation_data
 
-
 headers = {
     "charset": "utf-8",
     "Content-Type": "application/json",
@@ -45,10 +44,10 @@ class GetAutomationDataApiView(APIView):
 
             # if not (ein and ssn):
             #     data['step_19']['ein'] = 345678747
-            # data['step_19']['ein'] = 345678456
+            data['step_19']['ein'] = 345678456
 
             res = requests.post(
-                f"{settings.AUTOMATION_CROS_DOMAIN}/api/automation-progress-test/",
+                settings.AUTOMATION_PROGRESS_URL,
                 data=json.dumps({"company_id": company_id}),
                 headers=headers,
             )
