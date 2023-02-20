@@ -31,6 +31,7 @@ options.add_argument('start-maximized') #
 options.add_argument('disable-infobars')
 options.add_argument("--disable-extensions")
 options.add_argument('--disable-blink-features=AutomationControlled')
+options.add_argument('--log-level=3')
 
 
 class Automation:
@@ -1023,6 +1024,7 @@ def automate_usdot_paid(company_id, progress_id, data):
     try:
         auto = Automation()
         auto.progress_id = progress_id
+        auto.company_id = company_id
         save_ss_to = f'./media/fmcsa/automation/company_{company_id}'
         Path(parent_root / save_ss_to).mkdir(parents=True, exist_ok=True)
         auto.save_ss_to = save_ss_to

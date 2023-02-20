@@ -44,7 +44,7 @@ class GetAutomationDataApiView(APIView):
 
             # if not (ein and ssn):
             #     data['step_19']['ein'] = 345678747
-            data['step_19']['ein'] = 345678456
+            # data['step_19']['ein'] = 345678456
 
             res = requests.post(
                 settings.AUTOMATION_PROGRESS_URL,

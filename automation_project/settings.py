@@ -135,6 +135,6 @@ MEDIA_URL = "/media/"
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 
-AUTOMATION_CROS_DOMAIN = "http://18.232.168.89:8005"
-AUTOMATION_START_URL = f"{AUTOMATION_CROS_DOMAIN}/api/automation-start/"
-AUTOMATION_PROGRESS_URL = f"{AUTOMATION_CROS_DOMAIN}/api/automation-progress-test/"
+AUTOMATION_CROS_DOMAIN = "https://fmcsaregistration.com"
+AUTOMATION_START_URL = f"{AUTOMATION_CROS_DOMAIN}/api/automation/"
+AUTOMATION_PROGRESS_URL = f"{AUTOMATION_CROS_DOMAIN}/api/automation-progress/"
