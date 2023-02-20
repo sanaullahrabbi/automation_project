@@ -6,7 +6,7 @@ from rest_framework import permissions, status
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
-from app_main.automation import automate_usdot_free, automate_usdot_paid
+from app_main.automation import automate_usdot_free, automate_usdot_mc_dot, automate_usdot_broker
 from app_main.utils import automation_data
 
 headers = {
@@ -35,10 +35,11 @@ class GetAutomationDataApiView(APIView):
 
     def post(self, request, format=None):
         try:
-            initial_data = request.data
+            initial_data = request.data.copy()
             company_id = initial_data.get("company_id")
             progress_id = None
             is_automate_paid = "paid" in request.data
+            automation_type = request.data.get("type")
 
             data = automation_data(initial_data)
 
@@ -48,7 +49,7 @@ class GetAutomationDataApiView(APIView):
 
             res = requests.post(
                 settings.AUTOMATION_PROGRESS_URL,
-                data=json.dumps({"company_id": company_id}),
+                data=json.dumps({"company_id": company_id,"type":automation_type}),
                 headers=headers,
             )
 
@@ -57,11 +58,20 @@ class GetAutomationDataApiView(APIView):
                 progress_id = progress_data.get("progress_id")
 
             if progress_id:
-                if is_automate_paid:
-                    print("paid automation start")
+                if is_automate_paid and automation_type == "MC+DOT":
+                    print("paid mc+dot automation start")
                     return ResponseThen(
                         {"message": "automation start", "status": 1, "type": "paid"},
-                        automate_usdot_paid,
+                        automate_usdot_mc_dot,
+                        company_id=company_id,
+                        progress_id=progress_id,
+                        auto_data=data,
+                    )
+                elif is_automate_paid and automation_type == "Broker":
+                    print("paid broker automation start")
+                    return ResponseThen(
+                        {"message": "automation start", "status": 1, "type": "paid"},
+                        automate_usdot_broker,
                         company_id=company_id,
                         progress_id=progress_id,
                         auto_data=data,
