@@ -2884,6 +2884,8 @@ def automate_usdot_mc_dot(company_id, progress_id, data):
         print("driver quit")
 
     return True
+
+
 def automate_usdot_broker(company_id, progress_id, data):
     try:
         auto = Automation()
