@@ -6,7 +6,7 @@ from rest_framework import permissions, status
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
-from app_main.automation import automate_usdot_free, automate_usdot_mc_dot, automate_usdot_broker
+from app_main.automation import automate_usdot_free, automate_usdot_household, automate_usdot_mc_dot, automate_usdot_broker
 from app_main.utils import automation_data
 
 headers = {
@@ -61,7 +61,7 @@ class GetAutomationDataApiView(APIView):
                 if is_automate_paid and automation_type == "MC+DOT":
                     print("paid mc+dot automation start")
                     return ResponseThen(
-                        {"message": "automation start", "status": 1, "type": "paid"},
+                        {"message": "automation start", "status": 1, "type": automation_type},
                         automate_usdot_mc_dot,
                         company_id=company_id,
                         progress_id=progress_id,
@@ -70,8 +70,17 @@ class GetAutomationDataApiView(APIView):
                 elif is_automate_paid and automation_type == "Broker":
                     print("paid broker automation start")
                     return ResponseThen(
-                        {"message": "automation start", "status": 1, "type": "paid"},
+                        {"message": "automation start", "status": 1, "type": automation_type},
                         automate_usdot_broker,
+                        company_id=company_id,
+                        progress_id=progress_id,
+                        auto_data=data,
+                    )
+                elif automation_type == "Household":
+                    print("Household automation start")
+                    return ResponseThen(
+                        {"message": "automation start", "status": 1, "type": automation_type},
+                        automate_usdot_household,
                         company_id=company_id,
                         progress_id=progress_id,
                         auto_data=data,
@@ -79,7 +88,7 @@ class GetAutomationDataApiView(APIView):
                 else:
                     print("free automation start")
                     return ResponseThen(
-                        {"message": "automation start", "status": 1, "type": "free"},
+                        {"message": "automation start", "status": 1, "type": automation_type},
                         automate_usdot_free,
                         company_id=company_id,
                         progress_id=progress_id,
