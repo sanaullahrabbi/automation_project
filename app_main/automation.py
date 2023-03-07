@@ -216,7 +216,7 @@ class Automation:
             print(e)
 
 
-def automate_usdot_free(company_id, progress_id, data):
+def automate_usdot_private_inter(company_id, progress_id, data):
     try:
         auto = Automation()
         auto.progress_id = progress_id
@@ -939,22 +939,23 @@ def automate_usdot_free(company_id, progress_id, data):
         auto.update_auto_progress_with_ss(progress_id=progress_id, step=48)
 
         # step 49
-        auto.element_is_presence('form_B0071P070021')
+        auto.element_is_presence('form_B0061P060101')
         auto.element_clicked_by_id("menu_next_text")
 
         auto.update_auto_progress_with_ss(progress_id=progress_id, step=49)
 
         # step 50
-        auto.element_is_presence('form_B0061P060101')
+        auto.element_is_presence('form_B0071P070011')
         auto.element_clicked_by_id("menu_next_text")
 
         auto.update_auto_progress_with_ss(progress_id=progress_id, step=50)
 
-        # step 51
-        auto.element_is_presence("form_B0071P070011")
-        auto.element_clicked_by_id("menu_next_text")
+        # # step 51
+        # form_B0071P070021
+        # auto.element_is_presence("form_B0071P070011")
+        # auto.element_clicked_by_id("menu_next_text")
 
-        auto.update_auto_progress_with_ss(progress_id=progress_id, step=51)
+        # auto.update_auto_progress_with_ss(progress_id=progress_id, step=51)
 
         # step 52
         auto.element_is_presence('form_B0071P070021')
@@ -1156,6 +1157,7 @@ def automate_usdot_free(company_id, progress_id, data):
             auto.element_clicked_by_id('questionCode_B0231P230021S23002_Q23002_COMP_CONTACT_NME_id_Y')
         else:
             auto.element_clicked_by_id('questionCode_B0231P230021S23002_Q23002_COMP_CONTACT_NME_id_N')
+        auto.element_clicked_by_id("menu_next_text")
 
         auto.update_auto_progress_with_ss(progress_id=progress_id, step=77)
 
@@ -1250,7 +1252,7 @@ def automate_usdot_free(company_id, progress_id, data):
     return True
 
 
-def automate_usdot_household(company_id, progress_id, data):
+def automate_usdot_free(company_id, progress_id, data):
     try:
         auto = Automation()
         auto.progress_id = progress_id

@@ -423,7 +423,7 @@ def automation_data(initial_data):
             },
             "step_83": {},
         }
-    elif automation_type == "Household":
+    elif automation_type == "Private+Inter":
         data = {
             'step_9': {
                 'create_password': password,
